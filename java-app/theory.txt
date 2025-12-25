@@ -1,0 +1,5 @@
+1 - Run Java qoute Application on 8000 port using docker
+2 - write docker file 
+3 - build image
+4 - run image to create container
+5 - on host:8000 check java application is running
