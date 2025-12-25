@@ -1,0 +1,13 @@
+docker --help                 # Show all Docker commands and options
+man docker                    # Open Docker manual
+docker login                  # Login to Docker Hub
+docker images                 # List local Docker images
+docker ps                     # Show running containers
+docker ps -a                  # Show all containers (running + stopped)
+docker container ls           # List running containers (alternative)
+docker build -t java_app .    # Build Docker image from Dockerfile
+docker run -d -p 8000:8000 --name java-app-container java_app
+                              # Run container in detached mode with port mapping
+docker stop <container_id>    # Stop a running container gracefully
+docker kill <container_id>    # Force stop a running container
+docker rmi <image_id> --force # Force delete a Docker image
