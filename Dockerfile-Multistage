@@ -1,0 +1,36 @@
+# ----------------------------
+# Stage 1: Builder
+# ----------------------------
+FROM python:3.11.14-alpine3.23 AS builder
+
+WORKDIR /app
+
+# Build dependencies (only needed here)
+RUN apk add --no-cache gcc musl-dev linux-headers
+
+# Copy requirements first (better caching)
+COPY requirements.txt .
+
+# Build wheels
+RUN pip install --upgrade pip \
+    && pip wheel --no-cache-dir --no-deps -r requirements.txt -w /wheels
+
+
+# ----------------------------
+# Stage 2: Distroless Runtime
+# ----------------------------
+FROM gcr.io/distroless/python3-debian12
+
+WORKDIR /app
+
+# Copy wheels and install site-packages
+COPY --from=builder /wheels /wheels
+COPY --from=builder /usr/local/lib/python3.11/site-packages \
+                     /usr/local/lib/python3.11/site-packages
+
+# Copy application code
+COPY . .
+
+EXPOSE 80
+
+CMD ["run.py"]
