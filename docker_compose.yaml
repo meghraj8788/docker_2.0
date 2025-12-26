@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  java_app:
+    build: ./java-app
+    container_name: java_app
+    ports:
+      - "8080:8080"
+    networks:
+      - app_net
+
+  flask_app:
+    build: ./flask-app
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    networks:
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge
