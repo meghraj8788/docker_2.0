@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   java-app:
-    build:
-      context: .   # The folder where your Dockerfile is located
+      image: meghrajfand8788/java-app:latest
       dockerfile: Dockerfile
     container_name: java-app
     ports:
