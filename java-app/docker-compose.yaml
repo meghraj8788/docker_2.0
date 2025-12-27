@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  java-app:
+    build:
+      context: .   # The folder where your Dockerfile is located
+      dockerfile: Dockerfile
+    container_name: java-app
+    ports:
+      - "8000:8000"  # Maps host port 8000 to container port 8000
+    restart: always
